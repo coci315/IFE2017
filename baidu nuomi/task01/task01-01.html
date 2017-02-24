@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>自定义checkbox， radio样式</title>
+  <style>
+    #radio,
+    #checkbox {
+      display: none;
+    }
+    label span {
+      display: inline-block;
+      width: 18px;
+      height: 1em;
+      vertical-align: middle;
+      background: url(./imgs/sprite.png) no-repeat;
+    }
+    #label1 span {
+      background-position: -24px -10px;
+    }
+    #radio:checked + label span {
+      background-position: -59px -10px;
+    }
+    #label2 span {
+      background-position: -24px -32px;
+    }
+    #checkbox:checked + label span {
+      background-position: -59px -32px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <input type="radio" id="radio">
+    <label for="radio" id="label1"><span></span>点击选中单选按钮</label>
+  </div>
+  <div>
+    <input type="checkbox" id="checkbox">
+    <label for="checkbox" id="label2"><span></span>点击选中多选按钮</label>
+  </div>
+</body>
+</html>

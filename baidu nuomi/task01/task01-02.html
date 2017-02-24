@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>自定义checkbox， radio样式</title>
+  <style>
+    label {
+      position: relative;
+      display: inline-block;
+      width: 200px;
+      height: 24px;
+    }
+    #radio,
+    #checkbox {
+      display: none;
+    }
+    label:before {
+      display: inline-block;
+      content: ' ';
+      width: 12px;
+      height: 12px;
+      margin: 2px;
+      vertical-align: middle;
+    }
+    #label1:before {
+      border-radius: 50%;
+      border: 2px solid #ccc;
+    }
+    #radio:checked + label:before {
+      border-color: #d73d32;
+    }
+    #radio:checked + label:after {
+      position: absolute;
+      left: 7px;
+      top: 10px;
+      vertical-align: middle;
+      content: ' ';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #d73d32;
+    }
+    #label2:before {
+      border: 2px solid #ccc;
+    }
+    #checkbox:checked + label:before {
+      border-color: #d73d32;
+    }
+    #checkbox:checked + label:after {
+      position: absolute;
+      left: 6px;
+      top: 10px;
+      vertical-align: middle;
+      content: ' ';
+      width: 6px;
+      height: 3px;
+      border-left: 2px solid #d73d32;
+      border-bottom: 2px solid #d73d32;
+      transform: rotate(-45deg);
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <input type="radio" id="radio">
+    <label for="radio" id="label1">点击选中单选按钮</label>
+  </div>
+  <div>
+    <input type="checkbox" id="checkbox">
+    <label for="checkbox" id="label2">点击选中多选按钮</label>
+  </div>
+</body>
+</html>
