@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>自定义网页右键菜单</title>
+  <style>
+    html,
+    body,
+    #clickdiv {
+      width: 100%;
+      height: 100%;
+    }
+    html {
+      width: 90%;
+    }
+    #clickdiv {
+      margin: 50px;
+      background-color: #f5f5f5;
+      border-radius: 20px;
+      text-align: center;
+      display: table;
+    }
+    #content {
+      vertical-align: middle;
+      display: table-cell;
+    }
+    #menu {
+      position: absolute;
+      display: none;
+      left: 0;
+      top: 0;
+      cursor: default;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    ul {
+      margin: 0;
+      padding: 0;
+      border: 2px solid #eaeaea;
+      border-radius: 5px;
+      list-style-type: none;
+      background-color: #fff;
+    }
+    ul li a {
+      display: inline-block;
+      padding: 10px 15px;
+      text-decoration: none;
+      color: inherit;
+    }
+    ul li a:hover {
+      background-color: #eaeaea;
+    }
+  </style>
+</head>
+<body>
+  <div id="clickdiv">
+    <div id="content">
+      right click to see the menu
+    </div>
+  </div>
+  <div id="menu">
+    <ul>
+      <li><a href="#">Menu Item 01</a></li>
+      <li><a href="#">Menu Item 02</a></li>
+      <li><a href="#">Menu Item 03</a></li>
+      <li><a href="#">Menu Item 04</a></li>
+    </ul>
+  </div>
+  <script>
+    function addEvent(node,event,handler) {
+      if (node.addEventListener){
+          node.addEventListener(event,handler,false);
+      }else{
+          node.attachEvent('on'+event,handler);
+      }
+    }
+
+    function getMousePos(e) {
+          var scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
+          var scrollY = document.documentElement.scrollTop || document.body.scrollTop;
+          var x = e.pageX || e.clientX + scrollX;
+          var y = e.pageY || e.clientY + scrollY;
+          return { 'x': x, 'y': y };
+    }
+
+    var clickdiv = document.getElementById('clickdiv');
+    var menu = document.getElementById('menu');
+    var menuW = menu.clientWidth;
+    var menuH = menu.clientHeight;
+    var winW = document.body.clientWidth || document.documentElement.clientWidth;
+    var winH = document.body.clientHeight || document.documentElement.clientHeight;
+
+
+    addEvent(clickdiv, 'contextmenu', function(e) {
+      e = e || window.event;
+      e.preventDefault ? e.preventDefault() : e.returnValue = false;
+      var mousePos = getMousePos(e);
+      var pageX = mousePos.x;
+      var pageY = mousePos.y;
+      menu.style.display = 'block';
+      var menuW = menu.clientWidth;
+      var menuH = menu.clientHeight;
+
+      if (pageX + menuW > winW) {
+        menu.style.left = pageX - menuW - 10 + 'px';
+      } else {
+        menu.style.left = pageX + 10 + 'px';
+      }
+      if (pageY + menuH > winH) {
+        menu.style.top = pageY - menuH - 10 + 'px';
+      } else {
+        menu.style.top = pageY + 10 + 'px';
+      }
+
+    });
+
+    addEvent(document, 'click', function() {
+      menu.style.display = 'none';
+    });
+
+    addEvent(menu, 'click', function(e) {
+      e = e || window.event;
+      e.preventDefault();
+      var target = e.target || e.srcElement;
+      if (target.tagName == "A") {
+        alert(target.innerText);
+      }
+    });
+  </script>
+</body>
+</html>
