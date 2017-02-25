@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>正则表达式之入门</title>
+</head>
+<body>
+  <div>
+    请打开console面板查看结果。
+  </div>
+  <script>
+    // 1.编写一个判断给定数字是否为手机号码的正则表达式，测试用例参照但不限于：
+    // 18812011232  // 测试结果应该为 true
+    // 18812312     // false
+    // 12345678909  // false
+    var reg1 = /^1(3\d|4[579]|5[012356789]|7[0135678]|8\d)\d{8}$/;
+    console.log(reg1.test('18812011232'));
+    console.log(reg1.test('18812312'));
+    console.log(reg1.test('12345678909'));
+
+    // 2.编写一个判断输入的字符串是否有相邻重复单词的正则表达式，测试用例可以参考但不限于：
+    // foo foo bar       // true
+    // foo bar foo       // false  有重复单词但是不相邻
+    // foo  barbar bar   // false
+    var reg2 = /(\b\w+\b)\s+\1/;
+    console.log(reg2.test('foo foo bar'));
+    console.log(reg2.test('foo bar foo'));
+    console.log(reg2.test('foo barbar bar'));
+  </script>
+</body>
+</html>
