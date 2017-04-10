@@ -1,0 +1,198 @@
+@import 'reset';
+// 清除浮动
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: ' ';
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background-color: #fafafa;
+}
+
+.wrap {
+  @include clearfix();
+  width: 960px;
+  margin: 100px auto;
+  .playlist,
+  .player,
+  .cover {
+    float: left;
+  }
+  .playlist {
+    width: 210px;
+    height: 340px;
+    margin-right: 50px;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      width: 6px;
+      background-color: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(#7c7b82, 0);
+    }
+    &:hover::-webkit-scrollbar-thumb {
+      background-color: rgba(#7c7b82, .4);
+    }
+    li {
+      margin-bottom: 12px;
+      font-size: 14px;
+      line-height: 1.6;
+      cursor: pointer;
+      color: #7c7b82;
+      &:hover {
+        color: darken(#7c7b82, 20%);
+      }
+      &.active {
+        color: #000;
+        font-weight: bold;
+      }
+    }
+  }
+  .player {
+    width: 430px;
+    margin-top: 70px;
+    margin-right: 30px;
+    cursor: default;
+    .title,
+    .artist {
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .title {
+      margin-bottom: 12px;
+      font-size: 24px;
+    }
+    .artist {
+      margin-bottom: 22px;
+      font-size: 16px;
+      color: #656565;
+    }
+    .control {
+      @include clearfix();
+      margin-bottom: 6px;
+    }
+    .time_and_volume {
+      float: left;
+      svg:hover+.volume_slider>.outer {
+        margin-left: 0;
+      }
+    }
+    .volume_slider {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: middle;
+      width: 60px;
+      height: 20px;
+      .outer {
+        margin-top: 8px;
+        margin-left: -50px;
+        transition: all .5s;
+        width: 50px;
+        height: 3px;
+        background-color: #e5e5e8;
+        cursor: pointer;
+      }
+      &:hover .outer {
+        margin-left: 0;
+      }
+      .inner {
+        width: 50px;
+        height: 100%;
+        background-color: #979797;
+      }
+    }
+    .buttons_wrap {
+      float: right;
+      label {
+        display: inline-block;
+      }
+      label+label {
+        margin-left: 20px;
+      }
+    }
+    .icon {
+      cursor: pointer;
+      vertical-align: middle;
+    }
+    .time {
+      display: inline-block;
+      width: 40px;
+      margin-right: 10px;
+      color: #9b9b9b;
+      line-height: 20px;
+    }
+    .progress {
+      padding: 6px 0;
+      cursor: pointer;
+    }
+    .progress_outer {
+      height: 1px;
+      background-color: #ccc;
+      .progress_inner {
+        height: 100%;
+        width: 0;
+        background-color: #6bbd7a;
+      }
+    }
+    .buttons {
+      @include clearfix();
+      margin-top: 50px;
+      label {
+        display: inline-block;
+      }
+      label+label {
+        margin-left: 30px;
+      }
+    }
+    .btn_group_left {
+      float: left;
+    }
+    .btn_group_right {
+      float: right;
+      .btn_pause {
+        display: none;
+      }
+    }
+  }
+  .cover {
+    margin-top: 30px;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    img {
+      width: 100%;
+      border-radius: 50%;
+    }
+    a {
+      position: relative;
+      display: block;
+      &:hover:before {
+        content: '查看专辑信息';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 90px;
+        height: 20px;
+        margin-left: -45px;
+        margin-top: -10px;
+        text-align: center;
+        line-height: 20px;
+        font-size: 12px;
+        color: #fff;
+        background: rgba(0, 0, 0, .6);
+        border-radius: 1px;
+      }
+    }
+  }
+}
